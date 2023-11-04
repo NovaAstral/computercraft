@@ -3,7 +3,7 @@ local colint = peripheral.find("colonyIntegrator")
 if(colint == nil) then
     printError("Colony Integrator not found.")
     os.sleep(10)
-    os.shutdown()
+    os.reboot()
 else
     print("Colony Integrator found.")
 end
