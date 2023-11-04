@@ -12,10 +12,10 @@ local Menu = "main"
 
 while true do
     if(Menu == "main") then
-
+        print("main")
     end
 
     if(Menu == "ababab") then
-
+        print("not main")
     end
 end
