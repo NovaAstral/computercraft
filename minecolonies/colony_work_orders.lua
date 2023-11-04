@@ -8,8 +8,10 @@ end
 
 local Menu = "main"
 
-while(Menu == "main") do
+while(true) do
+    if(Menu == "main") then
 
-elseif(Menu == "ababab") do
+    elseif(Menu == "ababab") then
 
+    end
 end
