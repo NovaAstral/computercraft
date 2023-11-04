@@ -2,16 +2,18 @@ local colint = peripheral.find("colonyIntegrator")
 
 if(colint == nil) then
     printError("Colony Integrator not found.")
-    sleep(10)
-    shutdown()
+    os.sleep(10)
+    os.shutdown()
 end
 
 local Menu = "main"
 
-while(true) do
+while true do
     if(Menu == "main") then
 
-    elseif(Menu == "ababab") then
+    end
+
+    if(Menu == "ababab") then
 
     end
 end
