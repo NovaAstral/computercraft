@@ -6,13 +6,23 @@ function GetBuildings()
 
     for k,v in ipairs(buildings) do
         if(v.name == "com.minecolonies.building.builder") then
+            mon.setTextColor(colors.orange)
+            mon.write("Colony Builders Hut Orders")
+
             res = colint.getBuilderResources(v.location)
 
             for k,v in pairs(res) do
-                if(v.status == "NEED_MORE" or v.status == "DONT_HAVE" and v.delivering == 0) then
-                    mon.write("["..v.displayName.."]".." Need: ".."["..v.needed.."] ") -- item name
-                    curx, cury = mon.getCursorPos()
-                    mon.setCursorPos(1,cury+1)
+                if(#v == 0) then
+                    mon.setTextColor(colors.green)
+                    mon.setCursorPos(1,2)
+                    mon.write("No Work Orders :)")
+                else
+                    mon.setTextColor(colors.white)
+                    if(v.status == "NEED_MORE" or v.status == "DONT_HAVE" and v.delivering == 0) then
+                        mon.write("["..v.displayName.."]".." Need: ".."["..v.needed.."] ") -- item name
+                        curx, cury = mon.getCursorPos()
+                        mon.setCursorPos(1,cury+1)
+                    end
                 end
             end
         end
