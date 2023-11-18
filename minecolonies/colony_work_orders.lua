@@ -6,13 +6,19 @@ if(colint == nil) then
     os.reboot()
 else
     print("Colony Integrator found.")
+    GetBuildings()
 end
 
 local Menu = "main"
 
-while true do
+
+function GetBuildings()
     if(Menu == "main") then
-        print("main")
+        local buildings = colint.getBuildings()
+
+        for k,v in ipairs(buildings) do
+            print(v.name)
+        end
     end
 
     if(Menu == "ababab") then
