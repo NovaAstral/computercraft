@@ -7,7 +7,10 @@ function GetBuildings()
         local buildings = colint.getBuildings()
 
         for k,v in ipairs(buildings) do
-            if(v.name == "builder") then
+            if(v.name == "com.minecolonies.building.builder") then
+                curx, cury = mon.getCursorPos()
+                print(v)
+                print(v.location)
                 local res = colint.getBuilderResources(v.location)
 
                 for k,v in ipairs(res) do
@@ -34,6 +37,8 @@ if(mon == nil) then
     os.reboot()
 else
     print("Monitor found.")
+    mon.setCursorPos(1,1)
+    mon.reset()
     mon.setTextScale(0.5)
 end
 
