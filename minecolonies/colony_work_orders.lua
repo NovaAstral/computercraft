@@ -7,10 +7,10 @@ function GetBuildings()
         local buildings = colint.getBuildings()
 
         for k,v in ipairs(buildings) do
-            curs = mon.getCursorPos().y+2
+            curx, cury = mon.getCursorPos()
             print(v.name)
             mon.write(v.name)
-            mon.setCursorPos(1,curs)
+            mon.setCursorPos(1,cury+1)
         end
     end
 
