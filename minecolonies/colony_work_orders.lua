@@ -19,15 +19,6 @@ function GetBuildings()
     end
 end
 
-if(colint == nil) then
-    printError("Colony Integrator not found.")
-    os.sleep(10)
-    os.reboot()
-else
-    print("Colony Integrator found.")
-    GetBuildings()
-end
-
 if(mon == nil) then
     printError("Monitor not found.")
     os.sleep(10)
@@ -35,4 +26,14 @@ if(mon == nil) then
 else
     print("Monitor found.")
     mon.setTextScale(0.5)
+end
+
+if(colint == nil) then
+    printError("Colony Integrator not found.")
+    os.sleep(10)
+    os.reboot()
+else
+    print("Colony Integrator found.")
+    os.sleep(0.1)
+    GetBuildings()
 end
