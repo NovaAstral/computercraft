@@ -9,14 +9,28 @@ function GetBuildings()
         for k,v in ipairs(buildings) do
             if(v.name == "com.minecolonies.building.builder") then
                 curx, cury = mon.getCursorPos()
-                print(v)
-                print(v.location)
-                local res = colint.getBuilderResources(v.location)
+                delivering,item,needed,display,a,b,c = colint.getBuilderResources(v.location)
 
-                for k,v in ipairs(res) do
-                    mon.write(v)
-                    mon.setCursorPos(1,cury+1)
-                end
+                mon.write(delivering)
+                mon.setCursorPos(1,cury+1)
+
+                mon.write(item)
+                mon.setCursorPos(1,cury+2)
+
+                mon.write(needed)
+                mon.setCursorPos(1,cury+3)
+
+                mon.write(display)
+                mon.setCursorPos(1,cury+4)
+
+                mon.write(a)
+                mon.setCursorPos(1,cury+5)
+
+                mon.write(b)
+                mon.setCursorPos(1,cury+6)
+
+                mon.write(c)
+                mon.setCursorPos(1,cury+7)
             end
             
             --curx, cury = mon.getCursorPos()
