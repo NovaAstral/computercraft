@@ -15,13 +15,11 @@ function GetBuildings()
                     mon.setCursorPos(1,cury+1)
                 end
             end
-
-            /*
-            curx, cury = mon.getCursorPos()
-            print(v.name)
-            mon.write(v.name)
-            mon.setCursorPos(1,cury+1)
-            */
+            
+            --curx, cury = mon.getCursorPos()
+            --print(v.name)
+            --mon.write(v.name)
+            --mon.setCursorPos(1,cury+1)
         end
     end
 
