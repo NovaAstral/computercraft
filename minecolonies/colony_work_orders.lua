@@ -11,9 +11,17 @@ function GetBuildings()
                 res = colint.getBuilderResources(v.location)
 
                 for k,v in pairs(res) do
-                    if(v.status == "NEED_MORE" and v.delivering == false) then
-                        mon.write("["..v.displayName.."]".." Need: ".."["..v.needed.."] "..v.status) -- item name
+                    if(v.status == "NEED_MORE" or v.status == "DONT_HAVE" and v.delivering == 0) then
+                        if(v.status == "NEED_MORE") then
+                            statusstr = "Need More"
+                        else
+                            statusstr = "Don't Have"
+                        end
+
+                        mon.write("["..v.displayName.."]".." Need: ".."["..v.needed.."] "..statusstr) -- item name
                         curx, cury = mon.getCursorPos()
+                        mon.setCursorPos(1,cury+1)
+
                     end
                 end
             end
