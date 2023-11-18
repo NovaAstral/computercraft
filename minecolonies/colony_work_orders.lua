@@ -38,7 +38,7 @@ if(mon == nil) then
 else
     print("Monitor found.")
     mon.setCursorPos(1,1)
-    mon.reset()
+    mon.clear()
     mon.setTextScale(0.5)
 end
 
