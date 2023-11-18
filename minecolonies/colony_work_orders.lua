@@ -12,7 +12,7 @@ function GetBuildings()
             res = colint.getBuilderResources(v.location)
 
             for k,v in pairs(res) do
-                if(#v == 0) then
+                if(v[1] == nil) then
                     mon.setTextColor(colors.green)
                     mon.setCursorPos(1,2)
                     mon.write("No Work Orders :)")
