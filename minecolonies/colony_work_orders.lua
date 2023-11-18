@@ -8,11 +8,13 @@ function GetBuildings()
 
         for k,v in ipairs(buildings) do
             if(v.name == "com.minecolonies.building.builder") then
-                curx, cury = mon.getCursorPos()
                 res = colint.getBuilderResources(v.location)
 
                 for k,v in pairs(res) do
-                    print(res.item)
+                    if(v.status == "NEED_MORE" and v.delivering == false) then
+                        mon.write("["..v.displayName.."]".." Need: ".."["..v.needed.."] "..v.status) -- item name
+                        curx, cury = mon.getCursorPos()
+                    end
                 end
             end
             
