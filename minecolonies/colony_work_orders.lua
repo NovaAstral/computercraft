@@ -7,10 +7,21 @@ function GetBuildings()
         local buildings = colint.getBuildings()
 
         for k,v in ipairs(buildings) do
+            if(v.name == "builder") then
+                local res = colint.getBuilderResources(v.location)
+
+                for k,v in ipairs(res) do
+                    mon.write(v)
+                    mon.setCursorPos(1,cury+1)
+                end
+            end
+
+            /*
             curx, cury = mon.getCursorPos()
             print(v.name)
             mon.write(v.name)
             mon.setCursorPos(1,cury+1)
+            */
         end
     end
 
