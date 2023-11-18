@@ -1,16 +1,5 @@
 local colint = peripheral.find("colonyIntegrator")
-
-if(colint == nil) then
-    printError("Colony Integrator not found.")
-    os.sleep(10)
-    os.reboot()
-else
-    print("Colony Integrator found.")
-    GetBuildings()
-end
-
 local Menu = "main"
-
 
 function GetBuildings()
     if(Menu == "main") then
@@ -24,4 +13,13 @@ function GetBuildings()
     if(Menu == "ababab") then
         print("not main")
     end
+end
+
+if(colint == nil) then
+    printError("Colony Integrator not found.")
+    os.sleep(10)
+    os.reboot()
+else
+    print("Colony Integrator found.")
+    GetBuildings()
 end
