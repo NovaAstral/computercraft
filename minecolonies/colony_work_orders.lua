@@ -6,7 +6,7 @@ function GetBuildings()
 
     for k,v in ipairs(buildings) do
         if(v.name == "com.minecolonies.building.builder") then
-            mon.setTextColor(colors.orange)
+            mon.setTextColor(colors.red)
             mon.write("Colony Builders Hut Orders")
             mon.setCursorPos(1,2)
 
