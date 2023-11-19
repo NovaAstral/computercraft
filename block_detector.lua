@@ -9,6 +9,8 @@ function ReadBlock()
     mon.write("Reading data from: "..blockname)
     mon.setCursorPos(1,2)
 
+    mon.setTextColor(colors.orange)
+
     for k,v in ipairs(blockdata) do
         curx, cury = mon.getCursorPos()
 
@@ -33,7 +35,7 @@ if(reader == nil) then
     os.sleep(10)
     os.reboot()
 else
-    print("Colony Integrator found.")
+    print("Block Reader found.")
     os.sleep(0.1)
     ReadBlock()
 end
