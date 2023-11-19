@@ -8,6 +8,7 @@ function GetBuildings()
         if(v.name == "com.minecolonies.building.builder") then
             mon.setTextColor(colors.orange)
             mon.write("Colony Builders Hut Orders")
+            mon.setCursorPos(1,2)
 
             res = colint.getBuilderResources(v.location)
 
@@ -15,9 +16,9 @@ function GetBuildings()
                 if(v == nil) then
                     mon.setTextColor(colors.green)
                     mon.setCursorPos(1,2)
-                    mon.write("No Work Orders :)")
+                    mon.write("No Work Orders")
                 else
-                    mon.setTextColor(colors.white)
+                    mon.setTextColor(colors.orange)
                     if(v.status == "NEED_MORE" or v.status == "DONT_HAVE" and v.delivering == 0) then
                         mon.write("["..v.displayName.."]".." Need: ".."["..v.needed.."] ") -- item name
                         curx, cury = mon.getCursorPos()
