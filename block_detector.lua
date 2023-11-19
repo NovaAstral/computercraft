@@ -1,5 +1,5 @@
 local reader = peripheral.find("blockReader")
-local mon = peripheral.find("mon")
+local mon = peripheral.find("monitor")
 
 function ReadBlock()
     local blockdata = reader.getBlockData()
