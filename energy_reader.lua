@@ -3,7 +3,7 @@ local mon = peripheral.find("monitor")
 
 function ReadPower()
     local curpower = power.getEnergy()
-    local maxpower = power.getEnergyCapacity()
+    local maxpower = 69420 --power.getEnergyCapacity()
 
     if(curpower == nil) then
         mon.setTextColor(colors.red)
@@ -16,7 +16,7 @@ function ReadPower()
         mon.setCursorPos(1,2)
 
         mon.setTextColor(colors.orange)
-        mon.write("Max Storage Capacity: "..maxpower)
+        mon.write("Max Storage Capacity: ".."[Max Storage Capacity function does not work!]")
         mon.setCursorPos(1,3)
 
         mon.write("Current Power: "..curpower)
