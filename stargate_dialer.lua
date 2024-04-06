@@ -104,7 +104,7 @@ while true do
             print("Closing Stargate")
             Stargate.disconnectStargate()
         elseif(string.lower(cmdtest[1]) == "time") then
-            print("The Stargate has been open for "..Stargate.getOpenTime() / 20.." seconds.")
+            print("The Stargate has been open for "..Stargate.getOpenTime() / 20 .." seconds.")
         elseif(string.lower(cmdtest[1]) == "dial") then
             Menu = 2
             dial(cmds)
