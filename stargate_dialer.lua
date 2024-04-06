@@ -81,23 +81,31 @@ local function dial(tbl) --point of origin is 0
     end
 end
 
-while Menu == 1 do
-    print("Commands:")
-    print("Disconnect / Close - Closes or Resets the Stargate")
-    print("Dial - Dials the Stargate")
-    --print("Time - Prints how long the Stargate has been open for")
-    
-    write("CMD> ")
-    local cmd = read()
+while true do
+    if(Menu == 1) then
+        print("Commands:")
+        print("Disconnect / Close - Closes or Resets the Stargate")
+        print("Dial <address> - Dials the Stargate")
+        --print("Time - Prints how long the Stargate has been open for")
+        
+        write("CMD> ")
+        local cmd = read()
 
-    local cmds = split(cmd," ")
+        local cmdtest = split(cmd," ")
 
-    if(string.lower(cmds[1]) == "disconnect") then
-        print("disconnect")
-    elseif(string.lower(cmds[1]) == "close") then
-        print("close")
-    elseif(string.lower(cmds[1]) == "dial") then
-        Menu = 2
-        dial(cmds)
+        if(#cmdtest == 1) then
+            cmds = split(cmd,"-")
+        else
+            cmds = split(cmd," ")
+        end
+
+        if(string.lower(cmds[1]) == "disconnect") then
+            print("disconnect")
+        elseif(string.lower(cmds[1]) == "close") then
+            print("close")
+        elseif(string.lower(cmds[1]) == "dial") then
+            Menu = 2
+            dial(cmds)
+        end
     end
 end
