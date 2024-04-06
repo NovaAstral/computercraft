@@ -1,27 +1,29 @@
-Stargate = peripheral.find("basic_interface")
-
-if(Menu == 0 and Stargate ~= nil) then
-    print("Basic Interface Connected")
-    IntType = 1
-    Menu = 1
-elseif(Stargate) then
-    Stargate = peripheral.find("crystal_interface")
+if(Stargate == nil) then
+    peripheral.find("basic_interface")
 
     if(Stargate ~= nil) then
-        print("Crystal Interface Connected")
-        IntType = 2
+        print("Basic Interface Connected")
+        IntType = 1
         Menu = 1
     else
-        Stargate = peripheral.find("advanced_crystal_interface")
-        
+        Stargate = peripheral.find("crystal_interface")
+
         if(Stargate ~= nil) then
-            print("Advanced Crystal Interface Connected")
-            IntType = 3
+            print("Crystal Interface Connected")
+            IntType = 2
             Menu = 1
         else
-            print("No Interface Detected. Dialing Computer Offline.")
-            os.sleep(10)
-            os.reboot()
+            Stargate = peripheral.find("advanced_crystal_interface")
+            
+            if(Stargate ~= nil) then
+                print("Advanced Crystal Interface Connected")
+                IntType = 3
+                Menu = 1
+            else
+                print("No Interface Detected. Dialing Computer Offline.")
+                os.sleep(10)
+                os.reboot()
+            end
         end
     end
 end
