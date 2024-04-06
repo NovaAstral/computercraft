@@ -1,5 +1,5 @@
 if(Stargate == nil) then
-    peripheral.find("basic_interface")
+    Stargate = peripheral.find("basic_interface")
 
     if(Stargate ~= nil) then
         print("Basic Interface Connected")
@@ -43,41 +43,42 @@ local function dial(tbl) --point of origin is 0
         print("Dialing Intergalactic Address")
 
         os.sleep(1)
-        engageSymbol(tbl[1])
+        Stargate.engageSymbol(tbl[1])
         os.sleep(1)
-        engageSymbol(tbl[2])
+        Stargate.engageSymbol(tbl[2])
         os.sleep(1)
-        engageSymbol(tbl[3])
+        Stargate.engageSymbol(tbl[3])
         os.sleep(1)
-        engageSymbol(tbl[4])
+        Stargate.engageSymbol(tbl[4])
         os.sleep(1)
-        engageSymbol(tbl[5])
+        Stargate.engageSymbol(tbl[5])
         os.sleep(1)
-        engageSymbol(tbl[6])
+        Stargate.engageSymbol(tbl[6])
         os.sleep(1)
-        engageSymbol(0)
+        Stargate.engageSymbol(0)
     elseif(#tbl == 7) then
         print("Dialing Extragalactic Address")
 
         os.sleep(1)
-        engageSymbol(tbl[1])
+        Stargate.engageSymbol(tbl[1])
         os.sleep(1)
-        engageSymbol(tbl[2])
+        Stargate.engageSymbol(tbl[2])
         os.sleep(1)
-        engageSymbol(tbl[3])
+        Stargate.engageSymbol(tbl[3])
         os.sleep(1)
-        engageSymbol(tbl[4])
+        Stargate.engageSymbol(tbl[4])
         os.sleep(1)
-        engageSymbol(tbl[5])
+        Stargate.engageSymbol(tbl[5])
         os.sleep(1)
-        engageSymbol(tbl[6])
+        Stargate.engageSymbol(tbl[6])
         os.sleep(1)
-        engageSymbol(tbl[7])
+        Stargate.engageSymbol(tbl[7])
         os.sleep(1)
-        engageSymbol(0)
+        Stargate.engageSymbol(0)
     else
         print("Invalid Address!")
-        return
+        os.sleep(5)
+        Menu = 1
     end
 end
 
