@@ -1,10 +1,10 @@
 Stargate = peripheral.find("basic_interface")
 
-if(Stargate ~= nil) then
+if(Menu == 0 and Stargate ~= nil) then
     print("Basic Interface Connected")
     IntType = 1
     Menu = 1
-else
+elseif(Stargate) then
     Stargate = peripheral.find("crystal_interface")
 
     if(Stargate ~= nil) then
