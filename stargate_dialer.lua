@@ -29,7 +29,7 @@ if(Stargate == nil) then
 end
 
 local function split(str,sep)
-    sep = sep or "-" or ""
+    sep = sep or ""
     local ret = {}
     for token in str:gmatch("[^"..sep.."]+") do
         ret[#ret+1] = token
@@ -39,40 +39,40 @@ local function split(str,sep)
 end
 
 local function dial(tbl) --point of origin is 0
-    if(#tbl == 6) then
-        print("Dialing Intergalactic Address")
+    if(#tbl == 7) then -- index 1 is a space
+        print("Dialing Intergalactic Address "..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7].."-0")
 
         os.sleep(1)
-        Stargate.engageSymbol(tbl[1])
+        Stargate.engageSymbol(tonumber(tbl[2]))
         os.sleep(1)
-        Stargate.engageSymbol(tbl[2])
+        Stargate.engageSymbol(tonumber(tbl[3]))
         os.sleep(1)
-        Stargate.engageSymbol(tbl[3])
+        Stargate.engageSymbol(tonumber(tbl[4]))
         os.sleep(1)
-        Stargate.engageSymbol(tbl[4])
+        Stargate.engageSymbol(tonumber(tbl[5]))
         os.sleep(1)
-        Stargate.engageSymbol(tbl[5])
+        Stargate.engageSymbol(tonumber(tbl[6]))
         os.sleep(1)
-        Stargate.engageSymbol(tbl[6])
+        Stargate.engageSymbol(tonumber(tbl[7]))
         os.sleep(1)
         Stargate.engageSymbol(0)
-    elseif(#tbl == 7) then
-        print("Dialing Extragalactic Address")
+    elseif(#tbl == 8) then
+        print("Dialing Extragalactic Address "..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7].."-"..tbl[8].."-0")
 
         os.sleep(1)
-        Stargate.engageSymbol(tbl[1])
+        Stargate.engageSymbol(tonumber(tbl[2]))
         os.sleep(1)
-        Stargate.engageSymbol(tbl[2])
+        Stargate.engageSymbol(tonumber(tbl[3]))
         os.sleep(1)
-        Stargate.engageSymbol(tbl[3])
+        Stargate.engageSymbol(tonumber(tbl[4]))
         os.sleep(1)
-        Stargate.engageSymbol(tbl[4])
+        Stargate.engageSymbol(tonumber(tbl[5]))
         os.sleep(1)
-        Stargate.engageSymbol(tbl[5])
+        Stargate.engageSymbol(tonumber(tbl[6]))
         os.sleep(1)
-        Stargate.engageSymbol(tbl[6])
+        Stargate.engageSymbol(tonumber(tbl[7]))
         os.sleep(1)
-        Stargate.engageSymbol(tbl[7])
+        Stargate.engageSymbol(tonumber(tbl[8]))
         os.sleep(1)
         Stargate.engageSymbol(0)
     else
@@ -89,12 +89,12 @@ while true do
         print("Dial <address> - Dials the Stargate")
         --print("Time - Prints how long the Stargate has been open for")
         
-        write("CMD> ")
+        write("CMD > ")
         local cmd = read()
 
         local cmdtest = split(cmd," ")
 
-        if(#cmdtest == 1) then
+        if(#cmdtest == 2) then
             cmds = split(cmd,"-")
         else
             cmds = split(cmd," ")
