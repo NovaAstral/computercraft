@@ -38,6 +38,10 @@ function GetPlys()
             mon.setTextColor(colors.red)
         elseif(v == "spycatcher9653") then
             mon.setTextColor(colors.purple)
+        elseif(v == "HyperRuki") then
+            mon.setTextColor(colors.pink)
+        elseif(v == "Lady_azure3") then
+            mon.setTextColor(colors.purple)
         else
             mon.setTextColor(colors.lime)
         end

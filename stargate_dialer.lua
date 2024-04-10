@@ -84,6 +84,7 @@ local function dial(tbl) --point of origin is 0
         Menu = 1
     else
         print("Invalid Address!")
+        print(#tbl)
         os.sleep(5)
         Menu = 1
     end
@@ -123,6 +124,9 @@ while true do
                 Menu = 2
             elseif(cmdtest[2] == "earth") then
                 dial({"0","27","25","4","35","10","28"})
+                Menu = 2
+            elseif(cmdtest[3] == "atlantis" or cmdtest[3] == "lantea") then
+                dial({"0","18","20","1","15","14","7","19"})
                 Menu = 2
             else
                 Menu = 2
