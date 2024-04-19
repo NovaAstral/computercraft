@@ -9,20 +9,20 @@ Custom2Color = colors.pink
 Custom2TextCol = colors.white
 Custom2Adr = {"17","15","16","1","4","11","10","30","0"}
 
-Custom3Name = ""
-Custom3Color = colors.blue
+Custom3Name = "Rusty"
+Custom3Color = colors.brown
 Custom3TextCol = colors.white
-Custom3Adr = {"","","","","","","","",""}
+Custom3Adr = {"29","8","7","19","16","34","32","31","0"}
 
 Custom4Name = ""
 Custom4Color = colors.blue
 Custom4TextCol = colors.white
-Custom4Adr = {"","","","","","","","",""}
+Custom4Adr = {"","","","","","","","","0"}
 
 Custom5Name = ""
 Custom5Color = colors.blue
 Custom5TextCol = colors.white
-Custom5Adr = {"","","","","","","","",""}
+Custom5Adr = {"","","","","","","","","0"}
 ---End Custom Config---
 
 DevPrint = false
