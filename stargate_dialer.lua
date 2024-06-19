@@ -1,18 +1,18 @@
 ---Custom Config---
-Custom1Name = "Nova"
-Custom1Color = colors.pink
+Custom1Name = ""
+Custom1Color = colors.blue
 Custom1TextCol = colors.white
-Custom1Adr = {"17","16","35","23","32","8","31","1","0"}
+Custom1Adr = {"","","","","","","","","0"}
 
-Custom2Name = "Ruki"
-Custom2Color = colors.pink
+Custom2Name = ""
+Custom2Color = colors.blue
 Custom2TextCol = colors.white
-Custom2Adr = {"17","15","16","1","4","11","10","30","0"}
+Custom2Adr = {"","","","","","","","","0"}
 
-Custom3Name = "Rusty"
-Custom3Color = colors.brown
+Custom3Name = ""
+Custom3Color = colors.blue
 Custom3TextCol = colors.white
-Custom3Adr = {"29","8","7","19","16","34","32","31","0"}
+Custom3Adr = {"","","","","","","","","0"}
 
 Custom4Name = ""
 Custom4Color = colors.blue
@@ -157,15 +157,25 @@ function MonitorMainMenu()
     drawButton(1,19,"Close",colors.blue,colors.white)
 end
 
-if(Stargate == nil) then
-    Stargate = peripheral.find("advanced_crystal_interface")
-            
-    if(Stargate ~= nil) then
+if(Stargate == nil) then  
+    if(peripheral.find("advanced_crystal_interface") ~= nil) then
+		Stargate = peripheral.find("advanced_crystal_interface")
+	
         print("Advanced Crystal Interface Connected")
         Menu = 1
         PrintCmds = true
-    else
-        print("No Advanced Crystal Interface Detected. Dialing Computer Offline.")
+    elseif(peripheral.find("crystal_interface") ~= nil) then
+		Stargate = peripheral.find("crystal_interface")
+		print("Crystal Interface Connected")
+		Menu = 1
+		PrintCmds = true
+	elseif(peripheral.find("basic_interface") ~= nil) then
+		Stargate = peripheral.find("basic_interface")
+		print("Basic Interface Connected")
+		Menu = 1
+		PrintCmds = true
+	else
+        print("No Interface Detected. Dialing Computer Offline.")
         os.sleep(10)
         os.reboot()
     end
@@ -387,7 +397,7 @@ function textcmds()
             elseif(string.lower(cmdtest[1]) == "devprint") then
                 DevPrint = not DevPrint
                 print("Devprint "..tostring(DevPrint))
-            elseif(string.lower(cmdtest[1]) == "dial") then --make it check your current gates group for the address, dialing full 9chev might always connect
+            elseif(string.lower(cmdtest[1]) == "dial") then --dialing full 9chev always connects
                 Menu = 2
                 if(cmdtest[2] == "abydos") then -- {"","","","","",""}
                     addrtbl = {"26","6","14","31","11","29","0"}
@@ -395,10 +405,6 @@ function textcmds()
                     addrtbl = {"27","25","4","35","10","28","0"}
                 elseif(cmdtest[2] == "atlantis" or cmdtest[2] == "lantea") then
                     addrtbl = {"18","20","1","15","14","7","19","0"}
-                elseif(cmdtest[2] == "ruki") then
-                    addrtbl = {"17","15","16","1","4","11","10","30","0"}
-                elseif(cmdtest[2] == "nova") then
-                    addrtbl = {"17","16","35","23","32","8","31","1","0"}
                 else
                     addrtbl = cmds
                     table.remove(addrtbl,1)
@@ -406,6 +412,8 @@ function textcmds()
                 end
 
                 dial2(addrtbl)
+            elseif(string.lower(cmdtest[1]) == "power") then
+                print(Stargate.getStargateEnergy())
             else
                 print("Invalid Command")
             end
@@ -464,9 +472,9 @@ function monitorfunc()
         elseif(x >= 10 and x <= 15 and y == 3) then
             pressButton(10,3,"Lantea",colors.orange,colors.lightBlue,colors.white)
             if(true) then
-                dial2({"29","5","17","34","6","12","0"})
-            else
                 dial2({"18","20","1","15","14","7","19","0"})
+            else
+                dial2({"29","5","17","34","6","12","0"})
             end
         end
 
