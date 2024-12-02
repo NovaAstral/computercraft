@@ -1,18 +1,18 @@
 ---Custom Config---
-Custom1Name = ""
+Custom1Name = "Home"
 Custom1Color = colors.lightBlue
 Custom1TextCol = colors.pink
-Custom1Adr = {"","","","","","","","","0"}
+Custom1Adr = {"12","32","34","19","22","18","3","13","0"}
 
-Custom2Name = ""
+Custom2Name = "Castle"
 Custom2Color = colors.lightBlue
-Custom2TextCol = colors.white
-Custom2Adr = {"","","","","","","","","0"}
+Custom2TextCol = colors.brown
+Custom2Adr = {"11","30","6","3","20","2","13","16","0"}
 
-Custom3Name = ""
+Custom3Name = "Reserve 1"
 Custom3Color = colors.lightBlue
 Custom3TextCol = colors.white
-Custom3Adr = {"","","","","","","","","0"}
+Custom3Adr = {"21","31","32","8","16","2","30","34","0"}
 
 Custom4Name = ""
 Custom4Color = colors.lightBlue

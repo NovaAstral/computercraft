@@ -23,6 +23,7 @@ function GetPlys()
     mon.setCursorPos(1,2)
 
     for k,v in ipairs(plys) do
+		
         curx, cury = mon.getCursorPos()
         mon.setCursorPos(1,cury+1)
 
@@ -32,21 +33,19 @@ function GetPlys()
         local y = plyinfo.y
         local z = plyinfo.z
 
-        if(v == "Nova_Astral") then
+        if(v == "Nova_Astral" or v == "HyperRuki") then
             mon.setTextColor(colors.pink)
         elseif(v == "wildfire158") then
             mon.setTextColor(colors.red)
-        elseif(v == "spycatcher9653") then
-            mon.setTextColor(colors.purple)
-        elseif(v == "HyperRuki") then
-            mon.setTextColor(colors.pink)
-        elseif(v == "Lady_azure3") then
+        elseif(v == "spycatcher9653" or v == "Lady_azure3") then
             mon.setTextColor(colors.purple)
         else
             mon.setTextColor(colors.lime)
         end
-
-        mon.write(v..": Pos: <"..x.." "..y.." "..z.."> Dim: <"..dim..">")
+		
+		if(v ~= nil and dim ~= nil) then
+			mon.write(v..": Pos: <"..x.." "..y.." "..z.."> Dim: <"..dim..">")
+		end
     end
 
     os.sleep(5)

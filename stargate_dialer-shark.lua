@@ -1,13 +1,13 @@
 ---Custom Config---
-Custom1Name = ""
+Custom1Name = "Nova"
 Custom1Color = colors.lightBlue
 Custom1TextCol = colors.pink
-Custom1Adr = {"","","","","","","","","0"}
+Custom1Adr = {"32","13","33","1","35","29","7","15","0"}
 
-Custom2Name = ""
+Custom2Name = "Xed"
 Custom2Color = colors.lightBlue
 Custom2TextCol = colors.white
-Custom2Adr = {"","","","","","","","","0"}
+Custom2Adr = {"22","13","31","35","19","7","11","23","0"}
 
 Custom3Name = ""
 Custom3Color = colors.lightBlue
@@ -313,7 +313,7 @@ end
 
 function dial(tbl) --point of origin is 0
     if(#tbl == 7) then
-        print("\nDialing Intergalactic Address "..tbl[1].."-"..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7])
+        print("\nDialing Intergalactic Address "..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7])
 
         os.sleep(FastDialSpeed)
         Stargate.engageSymbol(tonumber(tbl[1]))
@@ -332,7 +332,7 @@ function dial(tbl) --point of origin is 0
         os.sleep(2)
         Menu = 1
     elseif(#tbl == 8) then
-        print("\nDialing Extragalactic Address "..tbl[1].."-"..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7].."-"..tbl[8])
+        print("\nDialing Extragalactic Address "..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7].."-"..tbl[8])
 
         os.sleep(FastDialSpeed)
         Stargate.engageSymbol(tonumber(tbl[1]))
@@ -353,7 +353,7 @@ function dial(tbl) --point of origin is 0
         os.sleep(2)
         Menu = 1
     elseif(#tbl == 9) then
-        print("\nDialing Universal Address "..tbl[1].."-"..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7].."-"..tbl[8].."-"..tbl[9])
+        print("\nDialing Universal Address "..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7].."-"..tbl[8].."-"..tbl[9])
         Menu = 1
         os.sleep(FastDialSpeed)
         Stargate.engageSymbol(tonumber(tbl[1]))
@@ -504,7 +504,7 @@ function textcmds()
                     if(cmdtest[2] == "abydos") then -- {"","","","","",""}
                         addrtbl = {"26","6","14","31","11","29","0"}
                     elseif(cmdtest[2] == "earth") then
-                        addrtbl = {"1","35","4","31","15","30","32","0"}
+                        addrtbl = {"27","25","4","35","10","28","0"}
                     elseif(cmdtest[2] == "atlantis" or cmdtest[2] == "lantea") then
                         addrtbl = {"18","20","1","15","14","7","19","0"}
                     else
@@ -546,9 +546,9 @@ function monitorfunc()
             if(x >= 2 and x <= 6 and y == 1) then
                 pressButton(2,1,"Earth",colors.orange,colors.brown,colors.white)
                 if(true) then --there's no function to get the fucking system
-					dial2({"1","35","4","31","15","30","32","0"})
-                else
                     dial2({"27","25","4","35","10","28","0"})
+                else
+                    dial2({"1","35","4","31","15","30","32","0"})
                 end
             elseif(x >= 2 and x <= 7 and y == 3) then
                 pressButton(2,3,"Nether",colors.orange,colors.red,colors.white)
@@ -560,9 +560,9 @@ function monitorfunc()
             elseif(x >= 2 and x <= 4 and y == 5) then
                 pressButton(2,5,"End",colors.orange,colors.yellow,colors.gray)
                 if(true) then
-					dial2({"13","24","2","19","3","30","0"})
-                elseif(true) then
                     dial2({"14","30","6","13","17","23","0"})
+                elseif(true) then
+                    dial2({"13","24","2","19","3","30","0"})
                 else
                     dial2({"18","24","8","16","7","35","30","0"})
                 end
