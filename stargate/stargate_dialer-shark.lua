@@ -156,6 +156,14 @@ function MonitorMainMenu()
         end
     end
 
+    if(IrisActive == true) then 
+        drawButton(26,Row4Y+2,"IRIS",colors.green,colors.white) --closed
+    else
+        drawButton(26,Row4Y+2,"IRIS",colors.red,colors.white) --open
+    end
+
+    drawButton(23,Row4Y+2,"SI",colors.blue,colors.white) --stop iris anim
+
     drawButton(19,1,Custom1Name,Custom1Color,Custom1TextCol)
     drawButton(19,3,Custom2Name,Custom2Color,Custom2TextCol)
     drawButton(19,5,Custom3Name,Custom3Color,Custom3TextCol)
@@ -191,6 +199,20 @@ if(Stargate == nil) then
         print("No Interface Detected. Dialing Computer Offline.")
         os.sleep(10)
         os.reboot()
+    end
+
+    if(Stargate ~= nil) then
+        if(Stargate.getIrisProgressPercentage() == 0) then
+            IrisActive = false
+        elseif(Stargate.getIrisProgressPercentage() == 100) then
+            IrisActive = true
+        else
+            printError("The Iris is opening or closing, cannot start the Dialing Computer. Rebooting in 2 seconds.")
+            IrisActive = false
+
+            os.sleep(2)
+            os.reboot()
+        end
     end
 end
 
@@ -276,7 +298,6 @@ function encodeChev(symbol)
             Stargate.encodeChevron()
             os.sleep(0.5)
             Stargate.closeChevron()
-            os.reboot()
         end
     end
 end
@@ -304,16 +325,12 @@ function slowdial(adr)
         os.sleep(0.4)
         Stargate.closeChevron()
         os.sleep(1)
-
-        if(chev == len) then
-            os.reboot()
-        end
     end
 end
 
 function dial(tbl) --point of origin is 0
     if(#tbl == 7) then
-        print("\nDialing Intergalactic Address "..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7])
+        print("\nDialing Intergalactic Address "..tbl[1].."-"..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7])
 
         os.sleep(FastDialSpeed)
         Stargate.engageSymbol(tonumber(tbl[1]))
@@ -332,7 +349,7 @@ function dial(tbl) --point of origin is 0
         os.sleep(2)
         Menu = 1
     elseif(#tbl == 8) then
-        print("\nDialing Extragalactic Address "..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7].."-"..tbl[8])
+        print("\nDialing Extragalactic Address "..tbl[1].."-"..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7].."-"..tbl[8])
 
         os.sleep(FastDialSpeed)
         Stargate.engageSymbol(tonumber(tbl[1]))
@@ -353,7 +370,7 @@ function dial(tbl) --point of origin is 0
         os.sleep(2)
         Menu = 1
     elseif(#tbl == 9) then
-        print("\nDialing Universal Address "..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7].."-"..tbl[8].."-"..tbl[9])
+        print("\nDialing Universal Address "..tbl[1].."-"..tbl[2].."-"..tbl[3].."-"..tbl[4].."-"..tbl[5].."-"..tbl[6].."-"..tbl[7].."-"..tbl[8].."-"..tbl[9])
         Menu = 1
         os.sleep(FastDialSpeed)
         Stargate.engageSymbol(tonumber(tbl[1]))
@@ -504,7 +521,7 @@ function textcmds()
                     if(cmdtest[2] == "abydos") then -- {"","","","","",""}
                         addrtbl = {"26","6","14","31","11","29","0"}
                     elseif(cmdtest[2] == "earth") then
-                        addrtbl = {"27","25","4","35","10","28","0"}
+                        addrtbl = {"1","35","4","31","15","30","32","0"}
                     elseif(cmdtest[2] == "atlantis" or cmdtest[2] == "lantea") then
                         addrtbl = {"18","20","1","15","14","7","19","0"}
                     else
@@ -546,9 +563,9 @@ function monitorfunc()
             if(x >= 2 and x <= 6 and y == 1) then
                 pressButton(2,1,"Earth",colors.orange,colors.brown,colors.white)
                 if(true) then --there's no function to get the fucking system
-                    dial2({"27","25","4","35","10","28","0"})
+					dial2({"1","35","4","31","15","30","32","0"})
                 else
-                    dial2({"1","35","4","31","15","30","32","0"})
+                    dial2({"27","25","4","35","10","28","0"})
                 end
             elseif(x >= 2 and x <= 7 and y == 3) then
                 pressButton(2,3,"Nether",colors.orange,colors.red,colors.white)
@@ -560,9 +577,9 @@ function monitorfunc()
             elseif(x >= 2 and x <= 4 and y == 5) then
                 pressButton(2,5,"End",colors.orange,colors.yellow,colors.gray)
                 if(true) then
-                    dial2({"14","30","6","13","17","23","0"})
+					dial2({"13","24","2","19","3","30","0"})
                 elseif(true) then
-                    dial2({"13","24","2","19","3","30","0"})
+                    dial2({"14","30","6","13","17","23","0"})
                 else
                     dial2({"18","24","8","16","7","35","30","0"})
                 end
@@ -729,6 +746,24 @@ function monitorfunc()
             elseif(x >= 1 and x <= 5 and y == 19) then --close
                 pressButton(1,19,"Close",colors.orange,colors.blue,colors.white)
                 Stargate.disconnectStargate()
+            end
+
+            if(x >= 26 and x <= 30 and y == Row4Y+2) then --iris control
+                pressToggleButton(26,Row4Y+2,"IRIS",IrisActive)
+                
+                IrisActive = not IrisActive
+
+                if(IrisActive == true) then
+                    Stargate.openIris()
+                else
+                    Stargate.closeIris()
+                end
+            end
+
+            if(x >= 23 and x <= 24 and y == Row4Y+2) then --stop iris anim
+                pressButton(23,Row4Y+2,"SI",colors.orange,colors.blue,colors.white)
+
+                Stargate.stopIris()
             end
 
             if(x >= 19 and x <= 19+#Custom1Name and y == 1) then
@@ -974,7 +1009,7 @@ function errorEvent()
                 EventMon.write("Dialing Stargate is Blacklisted")
                     EventMon.setTextColor(colors.orange)
             else
-                    EventMon.write("Stargate Reset with code: ")
+                    EventMon.write("Stargate Reset: ")
                 EventMon.setTextColor(colors.lime)
                     EventMon.write(code.." "..msg)
                 EventMon.setTextColor(colors.white)
@@ -992,5 +1027,30 @@ function errorEvent()
     end
 end
 
+function irisHitEvent()
+    while true do
+        if(EventMon ~= nil) then
+            local event,name,uuid = os.pullEvent("iris_thud")
 
-parallel.waitForAny(textcmds,monitorfunc,incomingEvent,outgoingEvent,errorEvent) --eventmonfunc
+            os.sleep(0.2)
+            EventMon.setCursorPos(1,1)
+            EventMon.setTextColor(colors.orange)
+
+            EventMon.write("A <")
+            EventMon.setTextColor(colors.lime)
+            EventMon.write(name)
+            EventMon.setTextColor(colors.orange)
+            EventMon.write("> <")
+            EventMon.setTextColor(colors.lime)
+            EventMon.write(uuid)
+            EventMon.setTextColor(colors.orange)
+            EventMon.write("> Hit the Iris")
+
+            EventMon.scroll(-1)
+            EventMon.setTextColor(colors.white)
+        end
+    end
+end
+
+
+parallel.waitForAny(textcmds,monitorfunc,incomingEvent,outgoingEvent,errorEvent,irisHitEvent) --eventmonfunc

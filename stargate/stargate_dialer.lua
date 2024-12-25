@@ -28,7 +28,8 @@ Custom5Adr = {"","","","","","","","","0"}
 DevPrint = false
 FastDialSpeed = 0.5
 --todo: remove the os.reboots from slow dialing, fix not being able to stop the gate from dialing
-
+--todo2: add lower to commands so letter case doesnt matter
+-- setenergy without a number crashes
 function devPrint(str)
     if(DevPrint == true) then
         print("n\ "..str)
@@ -156,6 +157,14 @@ function MonitorMainMenu()
         end
     end
 
+    if(IrisActive == true) then 
+        drawButton(26,Row4Y+2,"IRIS",colors.green,colors.white) --closed
+    else
+        drawButton(26,Row4Y+2,"IRIS",colors.red,colors.white) --open
+    end
+
+    drawButton(23,Row4Y+2,"SI",colors.blue,colors.white) --stop iris anim
+
     drawButton(19,1,Custom1Name,Custom1Color,Custom1TextCol)
     drawButton(19,3,Custom2Name,Custom2Color,Custom2TextCol)
     drawButton(19,5,Custom3Name,Custom3Color,Custom3TextCol)
@@ -191,6 +200,20 @@ if(Stargate == nil) then
         print("No Interface Detected. Dialing Computer Offline.")
         os.sleep(10)
         os.reboot()
+    end
+
+    if(Stargate ~= nil) then
+        if(Stargate.getIrisProgressPercentage() == 0) then
+            IrisActive = false
+        elseif(Stargate.getIrisProgressPercentage() == 100) then
+            IrisActive = true
+        else
+            printError("The Iris is opening or closing, cannot start the Dialing Computer. Rebooting in 2 seconds.")
+            IrisActive = false
+
+            os.sleep(2)
+            os.reboot()
+        end
     end
 end
 
@@ -276,7 +299,6 @@ function encodeChev(symbol)
             Stargate.encodeChevron()
             os.sleep(0.5)
             Stargate.closeChevron()
-            os.reboot()
         end
     end
 end
@@ -304,10 +326,6 @@ function slowdial(adr)
         os.sleep(0.4)
         Stargate.closeChevron()
         os.sleep(1)
-
-        if(chev == len) then
-            os.reboot()
-        end
     end
 end
 
@@ -533,6 +551,8 @@ function textcmds()
                 print("Invalid Command")
             end
         end
+
+        os.sleep(0.2)
     end
 end
 
@@ -731,6 +751,24 @@ function monitorfunc()
                 Stargate.disconnectStargate()
             end
 
+            if(x >= 26 and x <= 30 and y == Row4Y+2) then --iris control
+                pressToggleButton(26,Row4Y+2,"IRIS",IrisActive)
+                
+                IrisActive = not IrisActive
+
+                if(IrisActive == true) then
+                    Stargate.openIris()
+                else
+                    Stargate.closeIris()
+                end
+            end
+
+            if(x >= 23 and x <= 24 and y == Row4Y+2) then --stop iris anim
+                pressButton(23,Row4Y+2,"SI",colors.orange,colors.blue,colors.white)
+
+                Stargate.stopIris()
+            end
+
             if(x >= 19 and x <= 19+#Custom1Name and y == 1) then
                 pressButton(19,1,Custom1Name,colors.orange,Custom1Color,Custom1TextCol)
                 dial2(Custom1Adr)
@@ -766,7 +804,10 @@ function incomingEvent()
                 EventMon.write(adr[1].."-"..adr[2].."-"..adr[3].."-"..adr[4].."-"..adr[5].."-"..adr[6].."-"..adr[7].."-".."0")
             elseif(#adr == 8) then
                 EventMon.write(adr[1].."-"..adr[2].."-"..adr[3].."-"..adr[4].."-"..adr[5].."-"..adr[6].."-"..adr[7].."-"..adr[8].."-".."0")
+            else
+                print(#adr)
             end
+            
             EventMon.setTextColor(colors.white)
             EventMon.scroll(-1)
         end
@@ -974,7 +1015,7 @@ function errorEvent()
                 EventMon.write("Dialing Stargate is Blacklisted")
                     EventMon.setTextColor(colors.orange)
             else
-                    EventMon.write("Stargate Reset with code: ")
+                    EventMon.write("Stargate Reset: ")
                 EventMon.setTextColor(colors.lime)
                     EventMon.write(code.." "..msg)
                 EventMon.setTextColor(colors.white)
@@ -992,5 +1033,32 @@ function errorEvent()
     end
 end
 
+function irisHitEvent()
+    while true do
+        if(EventMon ~= nil) then
+            local event,name,uuid = os.pullEvent("iris_thud")
 
-parallel.waitForAny(textcmds,monitorfunc,incomingEvent,outgoingEvent,errorEvent) --eventmonfunc
+            os.sleep(0.2)
+            EventMon.setCursorPos(1,1)
+            EventMon.setTextColor(colors.orange)
+
+            EventMon.write("A <")
+            EventMon.setTextColor(colors.lime)
+            EventMon.write(name)
+            EventMon.setTextColor(colors.orange)
+            EventMon.write("> <")
+            EventMon.setTextColor(colors.lime)
+            EventMon.write(uuid)
+            EventMon.setTextColor(colors.orange)
+            EventMon.write("> Hit the Iris")
+
+            EventMon.scroll(-1)
+            EventMon.setTextColor(colors.white)
+        end
+
+        os.sleep(0.2)
+    end
+end
+
+
+parallel.waitForAny(textcmds,monitorfunc,incomingEvent,outgoingEvent,errorEvent,irisHitEvent) --eventmonfunc
