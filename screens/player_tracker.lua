@@ -23,7 +23,6 @@ function GetPlys()
     mon.setCursorPos(1,2)
 
     for k,v in ipairs(plys) do
-		
         curx, cury = mon.getCursorPos()
         mon.setCursorPos(1,cury+1)
 

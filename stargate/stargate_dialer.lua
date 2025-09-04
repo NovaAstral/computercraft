@@ -98,7 +98,10 @@ function MonitorMainMenu()
     drawButton(2,9,"Chulak",colors.green,colors.white)
 
     drawButton(10,1,"Tenebrae",colors.gray,colors.white)
-    drawButton(10,3,"Lantea",colors.lightBlue,colors.white)
+    drawButton(10,3,"Unitas",colors.yellow,colors.gray)
+    drawButton(10,5,"Rima",colors.gray,colors.white)
+    drawButton(10,7,"Lantea",colors.lightBlue,colors.gray)
+    drawButton(10,9,"Athos",colors.lightBlue,colors.gray)
 
     Row1Y = 11
     Row2Y = 13
@@ -522,9 +525,22 @@ function textcmds()
                     if(cmdtest[2] == "abydos") then -- {"","","","","",""}
                         addrtbl = {"26","6","14","31","11","29","0"}
                     elseif(cmdtest[2] == "earth") then
-                        addrtbl = {"1","35","4","31","15","30","32","0"}
+                        --addrtbl = {"1","35","4","31","15","30","32","0"}
+						addrtbl = {"27","25","4","35","10","28","0"}
                     elseif(cmdtest[2] == "atlantis" or cmdtest[2] == "lantea") then
                         addrtbl = {"18","20","1","15","14","7","19","0"}
+					elseif(cmdtest[2] == "rima") then
+						--addrtbl = {"1","31","21","8","19","2","9","0"}
+						addrtbl = {"33","20","10","22","3","17","0"}
+					elseif(cmdtest[2] == "unitas") then
+						--addrtbl = {"1","12","34","24","15","8","17","0"}
+						addrtbl = {"2","27","8","34","24","15","0"}
+					elseif(cmdtest[2] == "othala") then
+						addrtbl = {"10","26","22","15","32","2","8","0"}
+						--addrtbl = {"1","6","13","3","35","8","0"}
+					elseif(cmdtest[2] == "athos") then
+						--addrtbl = {"18","21","14","24","1","26","28","0"}
+						addrtbl = {"21","14","24","1","26","28","0"}
                     else
                         addrtbl = cmds
                         table.remove(addrtbl,1)
@@ -607,15 +623,35 @@ function monitorfunc()
                 else
                     dial2({"1","34","12","18","7","31","6","0"})
                 end
-            elseif(x >= 10 and x <= 15 and y == 3) then
-                pressButton(10,3,"Lantea",colors.orange,colors.lightBlue,colors.white)
+            elseif(x >= 10 and x <= 17 and y == 3) then
+                pressButton(10,3,"Unitas",colors.yellow,colors.gray,colors.white)
+                if(true) then
+                    dial2({"2","27","8","34","24","15","0"})
+                else
+                    dial2({"1","12","34","24","15","8","17","0"})
+                end
+            elseif(x >= 10 and x <= 17 and y == 5) then
+                pressButton(10,5,"Rima",colors.orange,colors.gray,colors.white)
+                if(true) then
+                    dial2({"33","20","10","22","3","17","0"})
+                else
+                    dial2({"1","31","21","8","19","2","9","0"})
+                end
+            elseif(x >= 10 and x <= 15 and y == 7) then
+                pressButton(10,7,"Lantea",colors.orange,colors.lightBlue,colors.gray)
                 if(true) then
                     dial2({"18","20","1","15","14","7","19","0"})
                 else
                     dial2({"29","5","17","34","6","12","0"})
                 end
+            elseif(x >= 10 and x <= 17 and y == 9) then
+                pressButton(10,9,"Athos",colors.orange,colors.gray,colors.white)
+                if(true) then
+                    dial2({"21","14","24","1","26","28","0"})
+                else
+                    dial2({"18","21","14","24","1","26","28","0"})
+                end
             end
-
 
             if(x == 6 and y == Row1Y) then
                 pressButton(6,Row1Y,"1",colors.orange,colors.blue,colors.white)
