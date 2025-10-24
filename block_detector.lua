@@ -1,41 +1,18 @@
 local reader = peripheral.find("blockReader")
-local mon = peripheral.find("monitor")
 
-function ReadBlock()
-    local blockdata = reader.getBlockData()
-    local blockname = reader.getBlockName()
+print(reader.getBlockName())
+--print(reader.getBlockData())
 
-    mon.setTextColor(colors.magenta)
-    mon.write("Reading data from: "..blockname)
-    mon.setCursorPos(1,2)
+tbl = reader.getBlockData()
 
-    mon.setTextColor(colors.orange)
+for k,v in pairs(reader.getBlockData()) do
+    --print("data: "..tostring(k).." "..tostring(v))
 
-    for k,v in ipairs(blockdata) do
-        curx, cury = mon.getCursorPos()
-
-        mon.write(v)
-        mon.setCursorPos(1,cury+1)
+    if(tostring(k) == "Source") then --print create sign reader thing
+        for k2,v2 in pairs(v) do
+            if(k2 == "Label") then
+                print("Label Data: "..v2)
+            end
+        end
     end
-end
-
-if(mon == nil) then
-    printError("Monitor not found.")
-    os.sleep(10)
-    os.reboot()
-else
-    print("Monitor found.")
-    mon.setCursorPos(1,1)
-    mon.clear()
-    mon.setTextScale(0.5)
-end
-
-if(reader == nil) then
-    printError("Block Reader not found.")
-    os.sleep(10)
-    os.reboot()
-else
-    print("Block Reader found.")
-    os.sleep(0.1)
-    ReadBlock()
 end

@@ -204,8 +204,8 @@ if(Stargate == nil) then
         os.sleep(10)
         os.reboot()
     end
-
-    if(Stargate ~= nil) then
+    
+    if(Stargate ~= nil and Stargate.getStargateType() ~= "sgjourney:tollan_stargate") then
         if(Stargate.getIrisProgressPercentage() == 0) then
             IrisActive = false
         elseif(Stargate.getIrisProgressPercentage() == 100) then
@@ -217,6 +217,8 @@ if(Stargate == nil) then
             os.sleep(2)
             os.reboot()
         end
+    else
+        IrisActive = false
     end
 end
 

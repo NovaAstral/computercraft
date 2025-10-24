@@ -1,4 +1,4 @@
---i never finished this because i found out you can just dragdrop files into CC:Twaked, so it probably doesnt work
+--i never finished this because i found out you can just dragdrop files into the computer... so it probably doesnt work
 
 local function filewrite(url,filename)
     local httpget = http.get(url)
