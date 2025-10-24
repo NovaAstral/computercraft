@@ -58,6 +58,18 @@ function DiskIns()
 
                 diskname = reader.getDiskLabel()
 
+                local fswrite = "w"
+
+                if(fs.isDir("dwriter/logs.txt")) then
+                    fswrite = "a" --append instead of overwriting the file
+                else
+                    fswrite = "w" --create the file
+                end
+
+                local file = fs.open("secdoor/logs.txt",fswrite)
+                file.write(os.date("%x").." "..textutils.formatTime(os.time("utc")).." Keycard <"..name.." | "..lvl.."> Created\n")
+                file.close()
+
                 os.sleep(0.1)
 
                 reader.ejectDisk()
